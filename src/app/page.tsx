@@ -1,20 +1,45 @@
-export const metadata = {
-  title: "Início",
-  description: "Página inicial do portfólio.",  
-};
+// export const metadata = {
+//   title: "Início",
+//   description: "Página inicial do portfólio.",  
+// };
+'use client'
+import { useState, useEffect } from 'react';
+import { getProjects } from '@/services/getProjects';
+import { ProjectsT } from '@/lib/data'
 
 import { FaGithubSquare } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa'
 import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { siteConfig, projects } from "@/lib/data";
+import { siteConfig } from "@/lib/data";
 import { ProjectCard } from "@/components/ProjectCard";
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function HomePage() {
-  const featuredProjects = projects.slice(0, 3);
+   const [projects, setProjects] = useState<ProjectsT[]>();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState();
+  
+    useEffect(() => {
+      const projectsList = async ()=>  {
+        try{
+          setLoading(true);
+          const response = await getProjects();
+          setProjects(response);
+        }
+        catch(err:any){
+          setLoading(false);
+          setError(err);
+          console.error(`Erro ao buscar projetos: ${err}`);
+        }
+        finally{
+          setLoading(false);
+        }
+      }
+      projectsList();
+    },[])
 
   return (
     <div className="flex flex-col">
@@ -34,13 +59,13 @@ export default function HomePage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Button className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
-                <Link href="/projects">
+                <Link href="/projetos">
                   Ver projetos
                 </Link>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button variant="outline" className="rounded-full border-border/50">
-                <Link href="/contact">Entrar em contato</Link>
+                <Link href="/contato">Entrar em contato</Link>
               </Button>
             </div>
             <div className="flex items-center gap-4">
@@ -101,9 +126,21 @@ export default function HomePage() {
             </Button>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <ProjectCard key={project.id} {...project} />
-            ))}
+            {projects !== undefined ? (
+            projects.map((project) => (
+            <ProjectCard 
+            id={project.id}
+            key={project.id} 
+            nome={project.nome} 
+            descricao={project.descricao} 
+            competencias={project.competencias} 
+            demo={project.demo}
+            repositorio={project.repositorio}
+            imagem={project.imagem} />
+          ))
+          ):(
+            <p>Nenhum projeto encontrado</p>
+          )}
           </div>
         </div>
       </section>

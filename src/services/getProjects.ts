@@ -1,16 +1,16 @@
-    async function getProjects() {
+    export async function getProjects() {
       try {
-        const response = await fetch('api/projects');
+        const response = await fetch('/api/projects');
         if (!response.ok) {
           const message = `Um erro ocorreu: ${response.statusText}`;
-          console.error(message);
+          console.error(`resposta: ${message}`);
           return;
-        }
+        };
         const projetos = await response.json();
+        console.log(`projetos: ${projetos}`)
         return projetos;
       } catch (error) {
         console.error("Erro ao buscar projetos:", error);
-    }
-    getProjects();
+    };
 
-  }
+  };

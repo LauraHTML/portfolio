@@ -1,12 +1,40 @@
-export const metadata = {
-  title: "Projetos",
-  description: "Explore os projetos criados.",  
-};
-import { projects, siteConfig } from "@/lib/data";
+'use client';
+// export const metadata = {
+//   title: "Projetos",
+//   description: "Explore os projetos criados.",  
+// };    
+import { useState, useEffect } from 'react';
+import { siteConfig } from "@/lib/data";
 import { ProjectCard } from "@/components/ProjectCard";
+import { getProjects } from '@/services/getProjects';
+import { ProjectsT } from '@/lib/data'
 
 
 export default function ProjectsPage() {
+  const [projects, setProjects] = useState<ProjectsT[]>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    const projectsList = async ()=>  {
+      try{
+        setLoading(true);
+        const response = await getProjects();
+        setProjects(response);
+      }
+      catch(err:any){
+        setLoading(false);
+        setError(err);
+        console.error(`Erro ao buscar projetos: ${err}`);
+      }
+      finally{
+        setLoading(false);
+      }
+    }
+    projectsList();
+  },[])
+
+ 
   return (
     <div className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
@@ -18,9 +46,22 @@ export default function ProjectsPage() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} {...project} />
-          ))}
+          {projects !== undefined ? (
+            projects.map((project) => (
+            <ProjectCard 
+            id={project.id}
+            key={project.id} 
+            nome={project.nome} 
+            descricao={project.descricao} 
+            competencias={project.competencias} 
+            demo={project.demo}
+            repositorio={project.repositorio}
+            imagem={project.imagem} />
+          ))
+          ):(
+            <p>Nenhum projeto encontrado</p>
+          )}
+          
         </div>
       </div>
     </div>
