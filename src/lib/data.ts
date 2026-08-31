@@ -12,6 +12,26 @@ export const siteConfig = {
   location: "São Paulo, Brasil",
 };
 
+export interface ProjectsT {
+  id: string,
+  nome: string,
+	descricao: string,
+	imagem: string,
+	competencias: {
+      backend: [],
+      frontend:[],
+      banco:[]
+    },
+	repositorio: string,
+	demo: string
+}
+
+export interface CompetenciasT {
+  backend: string[],
+  frontend: string[],
+  banco: string[],
+}
+
 export const aboutData = {
   bio: "Sou estudante de Engenharia de Software e estou em busca da minha primeira oportunidade de estágio. Tenho experiência prática com desenvolvimento fullstack, criando aplicações web modernas com React, Node.js e bancos de dados SQL/NoSQL.",
   education: [
@@ -44,7 +64,7 @@ export const projects = [
     technologies: ["Node.js", "Express", "MongoDB", "JWT"],
     demoUrl: "#",
     repoUrl: "#",
-    image: "/images/project-ecommerce.jpg",
+    image: "/dashboard-estudo.png",
   },
   {
     id: "portfolio-dashboard",

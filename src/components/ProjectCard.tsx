@@ -11,68 +11,74 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from 'next/image';
-
-interface ProjectCardProps {
-  title: string;
-  description: string;
-  technologies: string[];
-  demoUrl: string;
-  repoUrl: string;
-  image: string;
-}
+import { ProjectsT } from '@/lib/data';
+import Link from 'next/link';
 
 export function ProjectCard({
-  title,
-  description,
-  technologies,
-  demoUrl,
-  repoUrl,
-  image,
-}: ProjectCardProps) {
+  id,
+  nome,
+  descricao,
+  competencias,
+  demo,
+  repositorio,
+  imagem,
+}: ProjectsT) {
+
+  const categoriasPreenchidas = Object.entries(competencias || {}).filter(
+  ([, tecnologias]) => Array.isArray(tecnologias) && tecnologias.length > 0
+);
+
+  for(const item in categoriasPreenchidas){
+    const tecnologias = categoriasPreenchidas[item][1]
+    console.log('tec: ', tecnologias)
+  }
+  console.log('tecnologias: ', categoriasPreenchidas)
+
   return (
     <Card className="group flex flex-col overflow-hidden border-border/50 bg-card transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
       <div className="aspect-video w-full overflow-hidden bg-secondary">
         <Image
           width={200}
           height={200}
-          src={image}
-          alt={`Preview do projeto ${title}`}
+          src={imagem}
+          alt={`Preview do projeto ${nome}`}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
+          loading="eager"
         />
       </div>
-      <CardHeader className="flex-grow">
-        <CardTitle className="font-display text-xl text-card-foreground">{title}</CardTitle>
-        <CardDescription className="text-muted-foreground">{description}</CardDescription>
+      <CardHeader className="grow">
+        <CardTitle className="font-display text-xl text-card-foreground">{nome}</CardTitle>
+        <CardDescription className="text-muted-foreground">{descricao}</CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow">
-        <div className="flex flex-wrap gap-2">
-          {technologies.map((tech) => (
-            <Badge
-              key={tech}
-              variant="secondary"
-              className="bg-secondary/80 text-secondary-foreground hover:bg-secondary"
-            >
-              {tech}
-            </Badge>
-          ))}
-        </div>
-      </CardContent>
+      <CardContent className="grow">
+  {categoriasPreenchidas.map(([categoria, tecnologias]) => (
+    <div key={categoria}>
+      <strong>{categoria}</strong>
+
+      <div className="my-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {(tecnologias as string[]).map((tecnologia) => (
+          <Badge variant="secondary" key={tecnologia}>
+            {tecnologia}
+          </Badge>
+        ))}
+      </div>
+    </div>
+  ))}
+</CardContent>
       <CardFooter className="flex gap-3">
+        <Link href={demo}>
         <Button variant="default" size="sm" className="flex-1 rounded-full">
           <ExternalLink className="mr-2 h-4 w-4" />
-          <a href={demoUrl} target="_blank" rel="noopener noreferrer">
-            
             Demo
-          </a>
         </Button>
+        </Link>
+        <Link href={repositorio}>
         <Button variant="outline" size="sm" className="flex-1 rounded-full border-border/50">
          <FaGithubSquare className="mr-2 h-4 w-4" />
-          <a href={repoUrl} target="_blank" rel="noopener noreferrer">
-           
             Código
-          </a>
         </Button>
+        </Link>
+        
       </CardFooter>
     </Card>
   );
