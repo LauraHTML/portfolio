@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import Image from 'next/image';
 import { ProjectsT } from '@/lib/data';
+import { TechnologiesT } from '@/lib/data';
 import Link from 'next/link';
 
 export function ProjectCard({
