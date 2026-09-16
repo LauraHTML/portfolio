@@ -42,6 +42,14 @@ export default function AboutPage() {
 
             <div className="rounded-3xl border border-border/50 bg-card p-6 sm:p-8">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <Target className="h-6 w-6" />
+              </div>
+              <h2 className="font-display text-2xl font-bold text-card-foreground">Objetivos</h2>
+              <p className="mt-4 leading-relaxed text-muted-foreground">{aboutData.goals}</p>
+            </div>
+
+            <div className="rounded-3xl border border-border/50 bg-card p-6 sm:p-8">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                 <GraduationCap className="h-6 w-6" />
               </div>
               <h2 className="font-display text-2xl font-bold text-card-foreground">Formação</h2>
@@ -56,13 +64,6 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-border/50 bg-card p-6 sm:p-8">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                <Target className="h-6 w-6" />
-              </div>
-              <h2 className="font-display text-2xl font-bold text-card-foreground">Objetivos</h2>
-              <p className="mt-4 leading-relaxed text-muted-foreground">{aboutData.goals}</p>
-            </div>
           </div>
         </div>
       </div>

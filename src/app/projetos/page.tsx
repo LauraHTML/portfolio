@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react';
 import { siteConfig } from "@/lib/data";
 import { ProjectCard } from "@/components/ProjectCard";
 import { getProjects } from '@/services/getProjects';
+import { getTechnologies } from '@/services/getTechnologies';
 import { ProjectsT } from '@/lib/data'
-
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<ProjectsT[]>();
@@ -32,8 +32,7 @@ export default function ProjectsPage() {
       }
     }
     projectsList();
-  },[])
-
+  },[]);
  
   return (
     <div className="px-4 py-16 sm:px-6 lg:px-8">
@@ -41,7 +40,7 @@ export default function ProjectsPage() {
         <div className="mb-12 text-center">
           <h1 className="font-display text-4xl font-bold text-foreground sm:text-5xl">Projetos</h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Aplicações web completas que desenvolvi para praticar e demonstrar minhas habilidades fullstack.
+            Aplicações web que desenvolvi para praticar e demonstrar minhas habilidades.
           </p>
         </div>
 

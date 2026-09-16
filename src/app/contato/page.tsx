@@ -51,7 +51,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">LinkedIn</p>
-                    <p className="font-medium text-card-foreground">linkedin.com/in/laurasampaio</p>
+                    <p className="font-medium text-card-foreground">linkedin.com/in/laura-sampaio-neves</p>
                   </div>
                 </a>
                 <a
@@ -65,7 +65,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">GitHub</p>
-                    <p className="font-medium text-card-foreground">github.com/laurasampaio</p>
+                    <p className="font-medium text-card-foreground">github.com/LauraHTML</p>
                   </div>
                 </a>
                 <div className="flex items-center gap-4 rounded-2xl p-4">
