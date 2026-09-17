@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, MailX, Mail } from "lucide-react";
 
 export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -19,39 +19,27 @@ export function ContactForm() {
     const formData = new FormData(e.currentTarget);
 
     try {
-      const response = await fetch("api/send", {
+      const response = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           firstName: formData.get("name"),
           message: formData.get("message"),
-          email: formData.get("emailUser"),
+          email: formData.get("email"),
         }),
       });
-      if (!response.ok) setStatus("error");
+      if (!response.ok) {
+        setStatus("error");
+        setErrorMessage(response.statusText);
+      }
 
-      setStatus("success");
+      setLoading(false);
     } catch (error: any) {
-      setStatus(`Ocorreu um erro: ${error}`);
+      setStatus("error");
+      setLoading(false);
       throw new Error("Ocorreu um erro no servidor: ", error);
     }
-
-    setSubmitted(true);
   };
-
-  if (submitted) {
-    return (
-      <div className="flex flex-col items-center justify-center rounded-3xl border border-border/50 bg-card p-8 text-center">
-        <CheckCircle className="mb-4 h-12 w-12 text-primary" />
-        <h3 className="font-display text-xl font-semibold text-card-foreground">
-          Mensagem enviada!
-        </h3>
-        <p className="mt-2 text-muted-foreground">
-          Obrigada pelo contato. Responderei assim que possível.
-        </p>
-      </div>
-    );
-  }
 
   return (
     <form
@@ -109,11 +97,16 @@ export function ContactForm() {
       </Button>
 
       {status === "success" && (
-        <p style={{ color: "green" }}>Email enviado com sucesso!</p>
+        <div className="bg-muted p-2 rounded-md border border-secondary flex gap-3">
+          <Mail /> <p>Email enviado com sucesso!</p>
+        </div>
       )}
 
       {status === "error" && (
-        <p style={{ color: "red" }}>Erro ao enviar email. Tente novamente.</p>
+        <div className="bg-muted p-2 rounded-md border border-secondary flex gap-3">
+          <MailX />{" "}
+          <p>Erro ao enviar email, tente novamente: {errorMessage}.</p>
+        </div>
       )}
     </form>
   );
