@@ -1,5 +1,5 @@
 import { ExternalLink } from "lucide-react";
-import { FaGithubSquare } from 'react-icons/fa'
+import { FaGithubSquare } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,10 +10,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Image from 'next/image';
-import { ProjectsT } from '@/lib/data';
-import { TechnologiesT } from '@/lib/data';
-import Link from 'next/link';
+import Image from "next/image";
+import { ProjectsT } from "@/lib/data";
+import Link from "next/link";
 
 export function ProjectCard({
   id,
@@ -24,19 +23,12 @@ export function ProjectCard({
   repositorio,
   imagem,
 }: ProjectsT) {
-
   const categoriasPreenchidas = Object.entries(competencias || {}).filter(
-  ([, tecnologias]) => Array.isArray(tecnologias) && tecnologias.length > 0
-);
-
-  for(const item in categoriasPreenchidas){
-    const tecnologias = categoriasPreenchidas[item][1]
-    console.log('tec: ', tecnologias)
-  }
-  console.log('tecnologias: ', categoriasPreenchidas)
+    ([, tecnologias]) => Array.isArray(tecnologias) && tecnologias.length > 0,
+  );
 
   return (
-    <Card className="group flex flex-col overflow-hidden border-border/50 bg-card transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+    <Card>
       <div className="aspect-video w-full overflow-hidden bg-secondary">
         <Image
           width={200}
@@ -48,38 +40,45 @@ export function ProjectCard({
         />
       </div>
       <CardHeader className="grow">
-        <CardTitle className="font-display text-xl text-card-foreground">{nome}</CardTitle>
-        <CardDescription className="text-muted-foreground">{descricao}</CardDescription>
+        <CardTitle className="font-display text-xl text-card-foreground">
+          {nome}
+        </CardTitle>
+        <CardDescription className="text-muted-foreground">
+          {descricao}
+        </CardDescription>
       </CardHeader>
       <CardContent className="grow">
-  {categoriasPreenchidas.map(([categoria, tecnologias]) => (
-    <div key={categoria}>
-      <strong>{categoria}</strong>
+        {categoriasPreenchidas.map(([categoria, tecnologias]) => (
+          <div key={categoria}>
+            <strong>{categoria}</strong>
 
-      <div className="my-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {(tecnologias as string[]).map((tecnologia) => (
-          <Badge variant="secondary" key={tecnologia}>
-            {tecnologia}
-          </Badge>
+            <div className="my-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {(tecnologias as string[]).map((tecnologia) => (
+                <Badge variant="secondary" key={tecnologia}>
+                  {tecnologia}
+                </Badge>
+              ))}
+            </div>
+          </div>
         ))}
-      </div>
-    </div>
-  ))}
-</CardContent>
+      </CardContent>
       <CardFooter className="flex gap-3">
         <Link href={demo}>
-        <Button variant="default" size="sm" className="flex-1 rounded-full">
-          <ExternalLink className="mr-2 h-4 w-4" />
+          <Button variant="default" size="sm" className="flex-1 rounded-full">
+            <ExternalLink className="mr-2 h-4 w-4" />
             Demo
-        </Button>
+          </Button>
         </Link>
         <Link href={repositorio}>
-        <Button variant="outline" size="sm" className="flex-1 rounded-full border-border/50">
-         <FaGithubSquare className="mr-2 h-4 w-4" />
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex-1 rounded-full border-border/50"
+          >
+            <FaGithubSquare className="mr-2 h-4 w-4" />
             Código
-        </Button>
+          </Button>
         </Link>
-        
       </CardFooter>
     </Card>
   );

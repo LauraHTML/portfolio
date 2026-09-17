@@ -3,8 +3,7 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const { Resend } = await import("resend");
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 
   try {
     //Pegar os dados enviados
@@ -24,8 +23,8 @@ export async function POST(request: Request) {
     console.log("Enviando email:");
     const { data, error } = await resend.emails.send({
       from: "Portfólio <onboarding@resend.dev>",
-      to: "sampaiolaura55@gmail.com",
-      subject: "Nova mensagem de contato",
+      to: ["sampaiolaura55@gmail.com"],
+      subject: "Mensagem de contato direto do portfólio",
       react: EmailTemplate({ firstName, message, email }),
     });
 
@@ -36,10 +35,10 @@ export async function POST(request: Request) {
 
     console.log("Email enviado com sucesso!");
     return NextResponse.json({ data });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Erro capturado:", error);
     return NextResponse.json(
-      { error: error.message || "Erro desconhecido" },
+      { error: error instanceof Error ? error.message : "Erro desconhecido" },
       { status: 500 },
     );
   }

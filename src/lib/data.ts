@@ -1,5 +1,3 @@
-import { DatabaseCheck, LayoutDashboard, Braces, Toolbox} from 'lucide-react';
-
 export const siteConfig = {
   name: "Laura Sampaio",
   role: "Estudante de Engenharia de Software",
@@ -13,23 +11,23 @@ export const siteConfig = {
 };
 
 export interface ProjectsT {
-  id: string,
-  nome: string,
-	descricao: string,
-	imagem: string,
-	competencias: {
-      backend: [],
-      frontend:[],
-      banco:[]
-    },
-	repositorio: string,
-	demo: string
+  id: string;
+  nome: string;
+  descricao: string;
+  imagem: string;
+  competencias: {
+    backend: [];
+    frontend: [];
+    banco: [];
+  };
+  repositorio: string;
+  demo: string;
 }
 
 export interface TechnologiesT {
-  icone: string,
-  category: string,
-  items: string[],
+  icone: string;
+  category: string;
+  items: string[];
 }
 
 export const aboutData = {
@@ -49,4 +47,3 @@ export const aboutData = {
   goals:
     "Meu objetivo é atuar como estagiária em desenvolvimento web, contribuindo em projetos reais enquanto aprimoro minhas habilidades técnicas e aprendo com profissionais experientes.",
 };
-
