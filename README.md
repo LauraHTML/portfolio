@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfólio
 
-## Getting Started
+[![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-First, run the development server:
+## Sobre o Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Criei esse site para mostrar meus projetos e conhecimentos técnicos. O objetivo foi criar uma aplicação e dinâmica, onde eu pudesse gerenciar a exibição dos meus trabalhos e oferecer uma forma direta e funcional para contato. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Funcionalidades
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Exibição Dinâmica de Projetos:** Listagem de trabalhos e estudos vem de uma base de dados no MongoDb.
+- **Formulário de Contato Funcional:** Sistema de envio de mensagens integrado diretamente com e-mail.
+- **Design Responsivo:** Layout adaptável para qualquer tamanho de tela (mobile, tablet e desktop).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tecnologias Utilizadas
 
-## Learn More
+A stack foi escolhida com foco em performance e organização do código:
 
-To learn more about Next.js, take a look at the following resources:
+* **[Next.js](https://nextjs.org/):** Framework principal da aplicação. Utilizado por sua organização de pastas, facilidade no roteamento e a capacidade de conectar ao MongoDb de forma fácil.
+* **[MongoDB](https://www.mongodb.com/):** Banco de dados NoSQL utilizado para armazenar e gerenciar as informações dos projetos exibidos.
+* **[Resend](https://resend.com/):** API de e-mail moderna utilizada para processar e entregar as mensagens enviadas pela aba de contato do site.
+* **[Tailwindcss](https://tailwindcss.com):** Tailwindcss para a criação do layout e estilização dos componentes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Preview
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<img width="700" height="600" alt="portfolio-hero" src="https://github.com/user-attachments/assets/b7fe56d5-0e99-4fb7-958b-07f93514f4ae" />
